@@ -27,11 +27,7 @@ export function Viorel(props) {
   }, [])
   return (
     <>
-    <OrbitControls />
-    <ambientLight intensity={1.0} />
-    <Environment preset="sunset" />
-    <directionalLight position={[5, 5, 5]} intensity={2.0} castShadow />
-    <group ref={group} {...props} dispose={null}>
+      <group ref={group} {...props} dispose={null}>
       <group name="Scene">
         <group name="Armature">
           <primitive object={nodes.Hips} />
