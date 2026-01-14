@@ -17,11 +17,11 @@ export function Viorel(props) {
   const { nodes, materials } = useGraph(clone)
 
   const { animations: anims2 } = useFBX("animations/armada.fbx")
-  const { animations: anims3 } = useFBX("animations/viorel.fbx")
-  anims3[1].name = 'idle'
-  console.log(anims3)
-  
-  const { actions } = useAnimations(anims3, group)
+  anims2[0].name = 'idle'
+  //const { animations: anims3 } = useFBX("animations/viorel.fbx")
+  //anims3[1].name = 'idle'
+    
+  const { actions } = useAnimations(anims2, group)
   
 
     useEffect(() => {
