@@ -9,11 +9,21 @@ import { useRef, useEffect, useLayoutEffect, useMemo } from 'react'
 
 function App() {
 
-  const options = useMemo(() => {
+  const camOptions = useMemo(() => {
     return {
-      x: { value: 0, min: 0, max: 50, step: 2 },
-      y: { value: 0, min: 0, max: 50, step: 2 },
-      z: { value: 0, min: 0, max: 50, step: 2 },
+      x: { value: 13, min: 0, max: 50, step: 1 },
+      y: { value: 6, min: 0, max: 50, step: 1 },
+      z: { value: 16, min: 0, max: 50, step: 1 },
+      visible: true,
+      color: { value: 'lime' }
+    }
+  }, [])
+
+  const avaOptions = useMemo(() => {
+    return {
+      x: { value: 0, min: 0, max: 10, step: 0.1 },
+      y: { value: 0, min: 0, max: 10, step: 0.1 },
+      z: { value: 0, min: 0, max: 10, step: 0.1 },
       visible: true,
       color: { value: 'lime' }
     }
@@ -21,8 +31,8 @@ function App() {
 
   const { cam } = useRef(null)
 
-  const pC = useControls('Camera', options)
-  const pV = useControls('Viorel', options)
+  const pC = useControls('Camera', camOptions)
+  const pV = useControls('Viorel', avaOptions)
 
 
   useEffect(() => {
@@ -47,15 +57,9 @@ function App() {
         <ambientLight intensity={1.0} />
         <Environment preset="sunset" />
         <directionalLight position={[5, 5, 5]} intensity={2.0} castShadow />
-        <Viorel position={[pV.x, pV.y, pV.z]} />
-        <Viorel position={[0, 0, 1]} />
-        <Viorel position={[0, 0, 2]} />
-        <Viorel position={[1, 0, 0]} />
-        <Viorel position={[1, 0, 1]} />
-        <Viorel position={[1, 0, 2]} />
-        <Viorel position={[2, 0, 0]} />
-        <Viorel position={[2, 0, 1]} />
-        <Viorel position={[2, 0, 2]} />
+        {[...Array(1).keys()].map(z => [...Array(1).keys()].map(x => 
+        <Viorel position={[x, 0, z]}/> )
+        )}
       </Canvas>
     </>
   );
